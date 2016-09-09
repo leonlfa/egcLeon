@@ -109,28 +109,35 @@ public class VerificationTests {
 		assertFalse("Votacion amañada", comprobacion);
 	}
 	
+	// Este metodo me comprobara que una cadena generada aleatoriamente se 
+	// encripta y desencripta correctamente en ambos metodos RSA y DES. 
+	// Repetira este proceso mil veces para dar una buena cobertura a la prueba
 	@Test
 	public void testAllVotes() throws NoSuchAlgorithmException, IOException, BadPaddingException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException {
 		for(int i = 0 ; i<100 ; i++){
+			//Genero un texto aleatorio
 			String texto = AuxTest.nextSessionId();
 			
-			//
 			AuthorityImpl clase = new AuthorityImpl();
-			KeyPair keysRSA = clase.getKeysRsa();
 			
-			byte[] votoCifrado = clase.encryptRSA(keysRSA, texto);
+			//Encripto y desencripto en RSA comprobando que ambos textos coinciden
+			KeyPair keysRSA = clase.getKeysRsa();				
+			byte[] votoCifrado = clase.encryptRSA(keysRSA, texto);		
+			
 			boolean comprobacion = clase.checkVoteRSA(votoCifrado, keysRSA);
 			assertTrue(comprobacion);
 			
-			String fin = clase.decryptRSA(keysRSA, votoCifrado);
-			
+			String fin = clase.decryptRSA(keysRSA, votoCifrado);		
 			assertTrue(texto.equals(fin));
-			//
+			System.out.println("Cadena original: "+texto+"\n Cadena Encriptada en RSA: "+votoCifrado.toString()+"\n Cadena despues de encriptar y desencriptar en RSA: "+fin+"\n");
+			
+			//Encripto y desencripto en DES comprobando que ambos textos coinciden
 			
 			SecretKey keyDES = clase.getKeyDes();
 			byte[] enc = clase.encryptDES(keyDES,texto);
 			String fin2 = clase.decryptDES(keyDES, enc);
 			assertTrue(texto.equals(fin2));
+			System.out.println("Cadena original: "+texto+"\n Cadena Encriptada en DES: "+enc.toString()+"\n Cadena despues de encriptar y desencriptar en DES: "+fin2+"\n");
 			
 			
 			
