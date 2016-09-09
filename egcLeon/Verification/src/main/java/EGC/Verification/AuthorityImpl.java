@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -30,12 +32,39 @@ public class AuthorityImpl implements Authority {
 			
 		return result;
 	}
+//encripta una coleccion de textos mediante el algoritmo RSA
+	public Collection<byte[]> encryptCollectionRSA(KeyPair key, Collection<String> textToEncypt)
+			throws NoSuchAlgorithmException, IOException {
+		
+		Collection<byte[]> result = new ArrayList<byte[]>();
+		for(String texto:textToEncypt){
+			byte[] cifrado = AuxClass.encryptRSA(key, texto);
+			result.add(cifrado);
+		}
+		
+			
+		return result;
+	}
+		
 //desemcripta un texto mediante el algoritmo RSA
 	public String decryptRSA(KeyPair key, byte[] cipherText) throws BadPaddingException {
 		String result;
 
 		result = AuxClass.decryptRSA(key, cipherText);
 
+		return result;
+	}
+	
+//desencripta una coleccion de textos mediante el algoritmo RSA
+	public Collection<String> decryptCollectionRSA(KeyPair key, Collection<byte[]> cipherText) throws BadPaddingException {
+
+		Collection<String> result = new ArrayList<String>();
+		for(byte[] cifrado:cipherText){
+			String texto = AuxClass.decryptRSA(key, cifrado);
+			result.add(texto);
+		}
+		
+			
 		return result;
 	}
 
