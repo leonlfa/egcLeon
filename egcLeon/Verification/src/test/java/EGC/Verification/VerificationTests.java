@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -143,6 +145,27 @@ public class VerificationTests {
 			
 			
 			
+		}
+	}
+
+	
+	@Test
+	public void testCollectionVotes() throws NoSuchAlgorithmException, IOException, BadPaddingException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException {
+		Collection<String> textos = new ArrayList<String>();
+		
+		for(int i = 0 ; i<100 ; i++){
+			//Genero un texto aleatorio
+			String texto = AuxTest.nextSessionId();
+			textos.add(texto);
+		}
+		AuthorityImpl clase = new AuthorityImpl();
+		
+		KeyPair keysRSA = clase.getKeysRsa();		
+		Collection<byte[]> encriptados = clase.encryptCollectionRSA(keysRSA, textos);
+		Collection<String> desencriptados = clase.decryptCollectionRSA(keysRSA, encriptados);
+		
+		for(String desencriptado: desencriptados){
+			assertTrue(textos.contains(desencriptado));
 		}
 	}
 
