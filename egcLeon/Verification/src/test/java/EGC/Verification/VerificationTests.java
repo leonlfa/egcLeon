@@ -168,6 +168,7 @@ public class VerificationTests {
 		//compruebo que los votos desencriptados son los mismos que los originales
 		for(String desencriptado: desencriptados){
 			assertTrue(textos.contains(desencriptado));
+			System.out.println("El texto: "+desencriptado+" se encripto y desencripto correctamente");
 		}
 	}
 

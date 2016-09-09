@@ -37,6 +37,7 @@ public class AuthorityImpl implements Authority {
 			throws NoSuchAlgorithmException, IOException {
 		
 		Collection<byte[]> result = new ArrayList<byte[]>();
+		
 		for(String texto:textToEncypt){
 			byte[] cifrado = AuxClass.encryptRSA(key, texto);
 			result.add(cifrado);
@@ -46,7 +47,7 @@ public class AuthorityImpl implements Authority {
 		return result;
 	}
 		
-//desemcripta un texto mediante el algoritmo RSA
+//desencripta un texto mediante el algoritmo RSA
 	public String decryptRSA(KeyPair key, byte[] cipherText) throws BadPaddingException {
 		String result;
 
@@ -59,6 +60,7 @@ public class AuthorityImpl implements Authority {
 	public Collection<String> decryptCollectionRSA(KeyPair key, Collection<byte[]> cipherText) throws BadPaddingException {
 
 		Collection<String> result = new ArrayList<String>();
+		
 		for(byte[] cifrado:cipherText){
 			String texto = AuxClass.decryptRSA(key, cifrado);
 			result.add(texto);
@@ -100,14 +102,18 @@ public class AuthorityImpl implements Authority {
 	@Override
 	public byte[] getMD5(String text) {
 		byte[] result = null;
+		
 		result = AuxClass.getHashCodeMD5(text);
+		
 		return result;
 	}
 
 	@Override
 	public byte[] getSHA1(String text) {
 		byte[] result = null;
+		
 		result = AuxClass.getHashCodeSHA(text);
+		
 		return result;
 	}
 
@@ -115,6 +121,7 @@ public class AuthorityImpl implements Authority {
 	@Override
 	public boolean checkVoteDes(String text, byte[] resumen) {
 		boolean res = false;
+		
 		byte[] md5 = AuxClass.getHashCodeMD5(text);
 		byte[] sha = AuxClass.getHashCodeSHA(text);
 		
