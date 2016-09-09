@@ -13,7 +13,7 @@ import javax.crypto.SecretKey;
 public class AuthorityImpl implements Authority {
 
 	
-
+//comprueba que el voto no a sido alterado
 	public boolean checkVoteRSA(byte[] votoCifrado, KeyPair key) {
 		boolean result;
 
@@ -21,7 +21,7 @@ public class AuthorityImpl implements Authority {
 
 		return result;
 	}
-
+//encripta un texto mediante el algoritmo RSA
 	public byte[] encryptRSA(KeyPair key, String textToEncypt)
 			throws NoSuchAlgorithmException, IOException {
 		byte[] result = null;
@@ -30,7 +30,7 @@ public class AuthorityImpl implements Authority {
 			
 		return result;
 	}
-
+//desemcripta un texto mediante el algoritmo RSA
 	public String decryptRSA(KeyPair key, byte[] cipherText) throws BadPaddingException {
 		String result;
 
@@ -49,6 +49,7 @@ public class AuthorityImpl implements Authority {
 		return AuxClass.returnKeysRSA();
 	}
 
+	// encripta mediante el algoritmo DES
 	public byte[] encryptDES(SecretKey key, String text) throws NoSuchAlgorithmException, IOException,
 			InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
 		byte[] result = null;
@@ -57,7 +58,7 @@ public class AuthorityImpl implements Authority {
 		
 		return result;
 	}
-
+	// desencripta mediante el algoritmo DES
 	public String decryptDES(SecretKey key, byte[] textCifrado) throws InvalidKeyException, NoSuchAlgorithmException,
 			NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
 		String result;
@@ -81,6 +82,7 @@ public class AuthorityImpl implements Authority {
 		return result;
 	}
 
+	// comprueba que el voto no a sido alterado
 	@Override
 	public boolean checkVoteDes(String text, byte[] resumen) {
 		boolean res = false;

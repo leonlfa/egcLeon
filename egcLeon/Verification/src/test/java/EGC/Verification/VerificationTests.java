@@ -111,7 +111,7 @@ public class VerificationTests {
 	
 	// Este metodo me comprobara que una cadena generada aleatoriamente se 
 	// encripta y desencripta correctamente en ambos metodos RSA y DES. 
-	// Repetira este proceso mil veces para dar una buena cobertura a la prueba
+	// Repetira este proceso cien veces para dar una buena cobertura a la prueba
 	@Test
 	public void testAllVotes() throws NoSuchAlgorithmException, IOException, BadPaddingException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException {
 		for(int i = 0 ; i<100 ; i++){
@@ -129,7 +129,7 @@ public class VerificationTests {
 			
 			String fin = clase.decryptRSA(keysRSA, votoCifrado);		
 			assertTrue(texto.equals(fin));
-			System.out.println("Cadena original: "+texto+"\n Cadena Encriptada en RSA: "+votoCifrado.toString()+"\n Cadena despues de encriptar y desencriptar en RSA: "+fin+"\n");
+			System.out.println("Cadena original: "+texto+"\n Cadena Encriptada en RSA: "+votoCifrado+"\n Cadena despues de encriptar y desencriptar en RSA: "+fin+"\n");
 			
 			//Encripto y desencripto en DES comprobando que ambos textos coinciden
 			
@@ -137,7 +137,7 @@ public class VerificationTests {
 			byte[] enc = clase.encryptDES(keyDES,texto);
 			String fin2 = clase.decryptDES(keyDES, enc);
 			assertTrue(texto.equals(fin2));
-			System.out.println("Cadena original: "+texto+"\n Cadena Encriptada en DES: "+enc.toString()+"\n Cadena despues de encriptar y desencriptar en DES: "+fin2+"\n");
+			System.out.println("Cadena original: "+texto+"\n Cadena Encriptada en DES: "+enc+"\n Cadena despues de encriptar y desencriptar en DES: "+fin2+"\n");
 			
 			
 			
