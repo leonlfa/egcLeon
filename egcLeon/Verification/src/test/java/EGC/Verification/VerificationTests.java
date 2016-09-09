@@ -148,22 +148,24 @@ public class VerificationTests {
 		}
 	}
 
-	
+	//este test comprueba los metodos que encriptan y desencriptan colecciones de votos
 	@Test
 	public void testCollectionVotes() throws NoSuchAlgorithmException, IOException, BadPaddingException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException {
 		Collection<String> textos = new ArrayList<String>();
 		
+		//genero una coleccion de textos
 		for(int i = 0 ; i<100 ; i++){
-			//Genero un texto aleatorio
 			String texto = AuxTest.nextSessionId();
 			textos.add(texto);
 		}
 		AuthorityImpl clase = new AuthorityImpl();
 		
-		KeyPair keysRSA = clase.getKeysRsa();		
+		KeyPair keysRSA = clase.getKeysRsa();	
+		// los encripto todos al mismo tiempo y los vuelvo a desencriptar
 		Collection<byte[]> encriptados = clase.encryptCollectionRSA(keysRSA, textos);
 		Collection<String> desencriptados = clase.decryptCollectionRSA(keysRSA, encriptados);
 		
+		//compruebo que los votos desencriptados son los mismos que los originales
 		for(String desencriptado: desencriptados){
 			assertTrue(textos.contains(desencriptado));
 		}
