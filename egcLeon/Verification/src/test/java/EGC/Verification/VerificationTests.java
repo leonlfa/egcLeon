@@ -108,5 +108,35 @@ public class VerificationTests {
 		boolean comprobacion = clase.checkVoteDes(texto, res);
 		assertFalse("Votacion amañada", comprobacion);
 	}
+	
+	@Test
+	public void testAllVotes() throws NoSuchAlgorithmException, IOException, BadPaddingException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException {
+		for(int i = 0 ; i<100 ; i++){
+			String texto = AuxTest.nextSessionId();
+			
+			//
+			AuthorityImpl clase = new AuthorityImpl();
+			KeyPair keysRSA = clase.getKeysRsa();
+			
+			byte[] votoCifrado = clase.encryptRSA(keysRSA, texto);
+			boolean comprobacion = clase.checkVoteRSA(votoCifrado, keysRSA);
+			assertTrue(comprobacion);
+			
+			String fin = clase.decryptRSA(keysRSA, votoCifrado);
+			
+			assertTrue(texto.equals(fin));
+			//
+			
+			SecretKey keyDES = clase.getKeyDes();
+			byte[] enc = clase.encryptDES(keyDES,texto);
+			String fin2 = clase.decryptDES(keyDES, enc);
+			assertTrue(texto.equals(fin2));
+			
+			
+			
+			
+			
+		}
+	}
 
 }

@@ -12,7 +12,7 @@ import javax.crypto.SecretKey;
 
 public interface Authority {
 	
-	//prueba
+	
 	//Recibe un voto cifrado y keypair(publica y privada), y comprueba si ese voto ha sido alterado mediante el método RSA.
 	public boolean checkVoteRSA(byte[] votoCifrado, KeyPair key);
 	
