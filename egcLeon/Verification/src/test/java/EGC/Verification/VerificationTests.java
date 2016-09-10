@@ -118,7 +118,7 @@ public class VerificationTests {
 	public void testAllVotes() throws NoSuchAlgorithmException, IOException, BadPaddingException, InvalidKeyException, NoSuchPaddingException, IllegalBlockSizeException {
 		for(int i = 0 ; i<100 ; i++){
 			//Genero un texto aleatorio
-			String texto = AuxTest.nextSessionId();
+			String texto = AuxTest.dameStringAleatorio();
 			
 			AuthorityImpl clase = new AuthorityImpl();
 			
@@ -155,7 +155,7 @@ public class VerificationTests {
 		
 		//genero una coleccion de textos
 		for(int i = 0 ; i<100 ; i++){
-			String texto = AuxTest.nextSessionId();
+			String texto = AuxTest.dameStringAleatorio();
 			textos.add(texto);
 		}
 		AuthorityImpl clase = new AuthorityImpl();

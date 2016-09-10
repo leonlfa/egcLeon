@@ -33,12 +33,12 @@ public class AuthorityImpl implements Authority {
 		return result;
 	}
 //encripta una coleccion de textos mediante el algoritmo RSA
-	public Collection<byte[]> encryptCollectionRSA(KeyPair key, Collection<String> textToEncypt)
+	public Collection<byte[]> encryptCollectionRSA(KeyPair key, Collection<String> textosAEncriptar)
 			throws NoSuchAlgorithmException, IOException {
 		
 		Collection<byte[]> result = new ArrayList<byte[]>();
 		
-		for(String texto:textToEncypt){
+		for(String texto:textosAEncriptar){
 			byte[] cifrado = AuxClass.encryptRSA(key, texto);
 			result.add(cifrado);
 		}
@@ -57,11 +57,11 @@ public class AuthorityImpl implements Authority {
 	}
 	
 //desencripta una coleccion de textos mediante el algoritmo RSA
-	public Collection<String> decryptCollectionRSA(KeyPair key, Collection<byte[]> cipherText) throws BadPaddingException {
+	public Collection<String> decryptCollectionRSA(KeyPair key, Collection<byte[]> textosEncriptados) throws BadPaddingException {
 
 		Collection<String> result = new ArrayList<String>();
 		
-		for(byte[] cifrado:cipherText){
+		for(byte[] cifrado:textosEncriptados){
 			String texto = AuxClass.decryptRSA(key, cifrado);
 			result.add(texto);
 		}
